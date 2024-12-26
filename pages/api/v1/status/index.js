@@ -31,9 +31,6 @@ async function status(request, response) {
         opened_connections: parseInt(databaseOpenedConnectionsValue),
       },
     },
-    max_connections: databaseMaxConnectionsValue,
-    live_connections:
-      databaseOpenedConnectionsResult.rows[0].active_connections,
   });
 }
 

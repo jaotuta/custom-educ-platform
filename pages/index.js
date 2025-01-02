@@ -1,8 +1,8 @@
 function Home() {
   return (
-    <body>
+    <div>
       <h1>Hello World!!!</h1> <h2>Atualização</h2>
-    </body>
+    </div>
   );
 }
 

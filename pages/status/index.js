@@ -31,30 +31,26 @@ function UpdatedAt() {
 
 function Dependencies() {
   const { isLoading, data } = useSWR("/api/v1/status", fetchAPI);
-  let dependencies = "Carregando...";
+  let databaseStatusInformation = "Carregando...";
 
   if (!isLoading && data) {
-    dependencies = data.dependencies;
+    databaseStatusInformation = (
+      <>
+        <div>Versão: {data.dependencies.database.version}</div>
+        <div>
+          Conexões Abertas: {data.dependencies.database.opened_connections}
+        </div>
+        <div>
+          Conexões Máximas: {data.dependencies.database.max_connections}
+        </div>
+      </>
+    );
   }
 
   return (
-    <div>
-      DEPENDENCIES:
-      <ul>
-        {Object.keys(dependencies).map((item, index) => (
-          <li key={index}>
-            {item.toUpperCase()}
-            <div>&nbsp;&nbsp;Version: {dependencies[item].version}</div>
-            <div>
-              &nbsp;&nbsp;Max Connections: {dependencies[item].max_connections}
-            </div>
-            <div>
-              &nbsp;&nbsp;Opened Connections:{" "}
-              {dependencies[item].opened_connections}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <h2>Database</h2>
+      <div>{databaseStatusInformation}</div>
+    </>
   );
 }
